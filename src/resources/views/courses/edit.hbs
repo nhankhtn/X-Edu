@@ -1,0 +1,92 @@
+{{!-- <div class='mt-4 wrapper-edit'>
+    <h3>{{course.name}}</h3>
+    <form 
+        class='mt-4'
+        method='POST'
+        action='/courses/{{course.id}}?_method=PUT'
+        enctype='multipart/form-data'
+    >
+        <button type='submit' class='btn btn-primary'>Save</button>
+        <div class='form-group'>
+            <label for='name'>Name</label>
+            <input
+                type='text'
+                class='form-control'
+                value='{{course.name}}'
+                id='name'
+                name='name'
+            />
+        </div>
+        <div class='form-group'>
+            <label for='description'>Description</label>
+            <textarea
+                class='form-control'
+                id='description'
+                name='description'
+            >{{course.description}}</textarea>
+        </div>
+        <div class='form-group'>
+            <label for='video'>Video introduce</label>
+            <input
+                type='file'
+                class='form-control'
+                id='video'
+                name='video'
+                accept='video/*'
+            />
+        </div>
+        <div class='form-group'>
+            <label for='target'>Target</label>
+            <ul id='targets-course'>
+                {{#each course.targets}}
+                    <li>
+                        {{this}}
+                        <button
+                            type='button'
+                            class='ml-2 btn-delete-target'
+                            data-id='${targetValues.length}'
+                        >
+                            <i class='bi bi-x-lg'></i>
+                        </button>
+                    </li>
+                {{/each}}
+            </ul>
+            <input type='text' class='form-control' id='target' />
+            <input type='hidden' id='targets-input' name='targets' />
+            <button
+                type='button'
+                class='btn btn-primary mt-1'
+                id='btn-add-target'
+            >Add target</button>
+        </div>
+    </form> 
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded",function () { 
+        const targetValues ={{{json course.targets}}}; // Handle event add target
+        $("#btn-add-target").on("click", function() { 
+            const inputTargetValue = $("#target").val().trim(); 
+            const li = document.createElement("li"); 
+            const btnDelete = `<button type="button" class="ml-2 btn-delete-target"data-id=${targetValues.length}> <i class="bi bi-x-lg"></i> </button> `
+            if(!inputTargetValue) return ; 
+            li.innerHTML = `${inputTargetValue} ${btnDelete}`; 
+            $("#targets-course").append(li); 
+            $("#target").val("");
+            targetValues.push(inputTargetValue); 
+        }) 
+        // Handle event delete target
+        $("#targets-course").on("click", ".btn-delete-target", function() { 
+            const indexDeleted = $(this).data("id") ; 
+            targetValues.splice(indexDeleted, 1);
+            $(this).closest("li").remove(); $("#targets-course.btn-delete-target").each(function(index) { 
+                $(this).data("id", index); 
+            });
+        });
+         // Handle event submit form
+         $("form").on("submit", function() {
+            $("#targets-input").val(JSON.stringify(targetValues)); 
+        }) 
+    })
+</script> 
+ --}}

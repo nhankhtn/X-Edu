@@ -1,0 +1,129 @@
+<div class='mt-4 position-relative wrapper'>
+    <div class='row'>
+        <div class='col-7 mt-4'>
+            <div>
+                <h3>{{course.name}}</h3>
+                <p>{{course.description}}</p>
+            </div>
+            <div>
+                <h4>Bạn sẽ học được những gì?</h4>
+                <ul class='d-flex flex-flow-wrap list-style-type-none pl-0'>
+                    {{#each course.targets}}
+                        <li class='flex-basis-50'>
+                            <i class='bi bi-check color-main'></i>
+                            {{this}}
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+            <div>
+                <h4 class='mb-0'>Nội dung khoá học</h4>
+                <div class='d-flex align-items-center'>
+                    <ul
+                        class='flex-1 d-flex list-style-type-none pl-0 mb-0 font-size-14'
+                    >
+                        <li class='ml-2 mr-2'>
+                            <strong>{{{countItem sections}}}</strong>
+                            chương
+                        </li>
+                        <li>•</li>
+                        <li class='ml-2 mr-2'>
+                            <strong>{{{countItem lessons}}}</strong>
+                            bài học
+                        </li>
+                        <li>•</li>
+                        <li class='ml-2 mr-2'>
+                            Thời lượng
+                            <strong>{{formatTime course.options.totalTime 'verbose'}}</strong>
+                        </li>
+                    </ul>
+                    <button
+                        type='button'
+                        class='btn btn-customize color-main font-size-14'
+                        data-target='.lesson-items'
+                        id='expand-all-btn'
+                    >
+                        <span class='expand'>Mở rộng tất cả</span>
+                        <span class='shrink d-none'>Thu nhỏ tất cả</span>
+                    </button>
+                </div>
+                {{#each sections}}
+                    <div class='wrapper-item-lesson pl-1 pt-1 pb-1 mb-2'>
+                        <div class='chapter d-flex align-items-center'>
+                            <button
+                                type='button'
+                                class='btn btn-light border-0 btn-customize btn-more'
+                                data-target="#collapse-lessons-{{this.sectionNumber}}"
+                                aria-expanded='false'
+                                aria-controls="collapse-lessons-{{this.sectionNumber}}"
+                            >
+                                <i class='bi bi-plus-lg icon-more'></i>
+                                <i class='bi bi-dash-lg icon-less d-none'></i>
+                            </button>
+                            <span class='flex-1'>{{this.title}}</span>
+                            <span class='mr-4 font-weight-400'>{{{countItem ../lessons "sectionNumber" this.sectionNumber}}}
+                                 bài học</span>
+                        </div>
+                        <div class='lesson-items d-none' id="collapse-lessons-{{this.sectionNumber}}">
+                            {{#each ../lessons}}
+                                {{#if (equal ../this.sectionNumber this.sectionNumber)}}
+                                <div
+                                    class='lesson-item d-flex align-items-center'
+                                >
+                                    <button
+                                        type='button'
+                                        class='btn btn-light border-0 btn-customize'
+                                    >
+                                        <i class='bi bi-play-circle icon'></i>
+                                    </button>
+                                    <span class='flex-1'>{{this.title}}</span>
+                                    <span
+                                        class='mr-4 font-weight-400'
+                                    >{{formatTime this.options.duration 'short'}}</span>
+                                </div>
+                                {{/if}}
+                            {{/each}}
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+        <div class='col-5 mt-4 d-flex flex-column align-items-center'>
+            <div class='preview-course'>
+                <i class='bi bi-play-circle icon-play'></i>
+                <span>Xem giới thiệu khoá học</span>
+            </div>
+            <div
+                class='d-flex flex-column align-items-center mt-4 wrapper-info'
+            >
+                <h2 class='color-main mb-3'>Miễn phí</h2>
+                <button
+                    id='register-course'
+                    type='button'
+                    class='btn btn-success'
+                >Đăng kí học</button>
+                <span class='mt-2'>
+                    <i class='bi bi-mortarboard'></i>
+                    Trình độ cơ bản
+                </span>
+                <span class='mt-2'>
+                    <i class='bi bi-backpack'></i>
+                    Tổng số
+                    <strong>{{{countItem lessons}}}</strong>
+                    bài học
+                </span>
+                <span class='mt-2'>
+                    <i class='bi bi-alarm'></i>
+                    Thời lương
+                    <strong>{{formatTime course.options.totalTime 'verbose'}}</strong>
+                </span>
+                <span class='mt-2'>
+                    <i class='bi bi-battery-full'></i>
+                    Học mọi lúc, mọi nơi
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src='/js/courses/show.js'></script>

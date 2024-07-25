@@ -1,0 +1,122 @@
+<nav class='navbar navbar-expand-lg navbar-dark bg-light fixed-top'>
+    <header
+        class='w-100 d-flex justify-content-space-between align-items-center pl-2 pr-2'
+    >
+        <a class='navbar-brand text-dark' href='/'>
+            <img class='logo' src='/img/min.jpg' alt='min' />
+            XEdu
+        </a>
+        <div class='input-group search-group mx-auto'>
+            <input
+                type='text'
+                class='form-control input-search'
+                placeholder='Enter course name...'
+                aria-label='Search'
+                aria-describedby='basic-addon2'
+            />
+            <div class='input-group-append'>
+                <button
+                    class='btn btn-outline-secondary btn-search'
+                    type='button'
+                >
+                    <i class='bi bi-search'></i>
+                </button>
+            </div>
+        </div>
+
+        <div class='collapse navbar-collapse' id='navbarSupportedContent'>
+            <button class='notify-btn btn mr-2'>
+                <i class='bi bi-bell-fill'></i>
+            </button>
+            <ul class='navbar-nav ml-auto'>
+
+                {{#if (hasUser user)}}
+                    <li class='nav-item dropdown'>
+                        <a
+                            class='nav-link dropdown-toggle text-dark'
+                            href='#'
+                            id='navbarDropdown'
+                            role='button'
+                            data-toggle='dropdown'
+                            aria-haspopup='true'
+                            aria-expanded='false'
+                        >
+                            <img
+                                src='{{user.avatar}}'
+                                alt='avatar'
+                                class='user-avatar'
+                            />
+                        </a>
+                        <div
+                            class='dropdown-menu'
+                            aria-labelledby='navbarDropdown'
+                        >
+                            <a
+                                href='/profile/{{user.email}}'
+                                class='d-flex align-items-center text-decoration-none dropdown-item'
+                            >
+                                <img
+                                    src='{{user.avatar}}'
+                                    alt='avatar'
+                                    class='user-avatar mr-4'
+                                />
+                                <div class='d-flex flex-column'>
+                                    <div
+                                        class='username'
+                                    >{{user.username}}</div>
+                                    <div class='email'>{{user.email}}</div>
+                                </div>
+                            </a>
+                            <div class='dropdown-divider'></div>
+                            <a
+                                class='dropdown-item'
+                                href='/profile/{{user.email}}'
+                            >Trang cá nhân</a>
+                            <div class='dropdown-divider'></div>
+                            <a class='dropdown-item' href='/new-post'>Viết blog</a>
+                            <a class='dropdown-item' href='/me/post'>Bài viết
+                                của tôi</a>
+                            <a class='dropdown-item' href='/me/bookmark'>Bài
+                                viết đã lưu</a>
+                            {{#if (isAdmin user)}}
+                                {{! <a
+                                    class='dropdown-item'
+                                    href='/admin/dashboard'
+                                >Dashboard</a>
+                                <div class='dropdown-divider'></div> }}
+                                <div class='dropdown-divider'></div>
+                                <a
+                                    class='dropdown-item'
+                                    href='/admin/stored/courses'
+                                >Khoá học đã đăng</a>
+                            {{/if}}
+                            <div class='dropdown-divider'></div>
+                            <a class='dropdown-item' href='/settings'>Cài đặt</a>
+                            <a class='dropdown-item' href='/auth/logout'>Đăng
+                                xuất</a>
+                        </div>
+                    </li>
+                {{else}}
+                    <li class='nav-item'>
+                        <button
+                            class='btn btn-outline-secondary btn-custom'
+                            data-target='#modal-register'
+                            data-toggle='modal'
+                        >
+                            Register
+                        </button>
+                        <button
+                            id='login-btn'
+                            class='btn btn-warning btn-custom'
+                            data-target='#modal-login'
+                            data-toggle='modal'
+                        >
+                            Login
+                        </button>
+                    </li>
+                {{/if}}
+            </ul>
+        </div>
+
+    </header>
+</nav>

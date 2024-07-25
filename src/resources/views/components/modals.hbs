@@ -1,0 +1,133 @@
+<div class='container-modal'>
+    {{! Modal video introduce course}}
+    <div
+        id='modal-video-intro'
+        class='wrapper-modal d-none align-items-center justify-content-center w-100 h-100'
+    >
+        {{#if course}}
+            <div class='modal-1 modal-video-intro position-relative'>
+                <h3>Giới thiệu khoá học</h3>
+                <h2>{{course.name}}</h2>
+                <button class='btn-close'>
+                    <i class='bi bi-x-lg'></i>
+                </button>
+                <div class='wrapper-video'>
+                    {{!-- <video muted autoPlay class="w-100 h-100" controls src={{course.videoUrl}}></video> --}}
+                    <iframe
+                        class='w-100 h-100'
+                        src='https://www.youtube.com/embed/NaQnFcDKFiM?si=Q4AwDj2Uyqy7hYf5'
+                        title='YouTube video player'
+                        frameborder='0'
+                        allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                        referrerpolicy='strict-origin-when-cross-origin'
+                        allowfullscreen
+                    ></iframe>
+                </div>
+            </div>
+        {{/if}}
+    </div>
+    {{! Modal register course to verify account}}
+    <div
+        id='modal-verify-account'
+        class='wrapper-modal d-none align-items-center justify-content-center w-100 h-100'
+    >
+        {{#if course}}
+            <div class='modal-2 modal-verify-account position-relative'>
+                <button class='btn-close'>
+                    <i class='bi bi-x-lg'></i>
+                </button>
+                <aside>
+                    <header>
+                        <a href='/'>
+                            <img class='logo' src='/img/min.jpg' alt='min' />
+                        </a>
+                        <h3>Cài đặt tài khoản</h3>
+                        <p>Quản lý cài đặt tài khoản của bạn như thông tin cá
+                            nhân, cài đặt bảo mật, quản lý thông báo, v.v.</p>
+                    </header>
+                    <nav>
+                        <button type='button' class='btn btn-light'>
+                            <i class='bi bi-person-fill'></i>
+                            Thông tin cá nhân
+                        </button>
+                        <button type='button' class='btn btn-light'>
+                            <i class='bi bi-shield-fill'></i>
+                            Mật khẩu và bảo mật
+                        </button>
+                    </nav>
+                </aside>
+                <main>
+                    <h3>Thông tin cá nhân</h3>
+                    <span>Quản lí thông tin cá nhân của bạn</span>
+                    <strong>Thông tin cơ bản</strong>
+                    <span>Quản lí tên hiển thị, tên người dùng, bio và avater
+                        của bạn</span>
+                    <div>
+                        <button
+                            type='button'
+                            class='btn btn-light'
+                        >Light</button>
+                    </div>
+                </main>
+            </div>
+        {{/if}}
+    </div>
+    {{! Modal login course if not logged in yet}}
+    <div
+        id='modal-login'
+        class='wrapper-modal d-none align-items-center justify-content-center w-100 h-100'
+    >
+        <div
+            class='modal-2 modal-login position-relative d-flex flex-column align-items-center'
+        >
+            <button class='btn-close'>
+                <i class='bi bi-x-lg'></i>
+            </button>
+            <a class='mt-6 mb-4' href='/'>
+                <img class='logo mr-0' src='/img/min.jpg' alt='min' />
+            </a>
+            <h3>Đăng nhập vào XEdu</h3>
+            <p class='text-danger'>
+                Mỗi người nên sử dụng riêng một tài khoản, tài khoản nhiều người
+                sử dụng sẽ bị khoá
+            </p>
+            <button
+                type='button'
+                class='btn btn-outline-secondary btn-login d-flex'
+            >
+                <i class='bi bi-person'></i>
+                <span class='flex-1'>Sử dụng email / số điện thoại</span>
+            </button>
+            <button
+                type='button'
+                class='btn btn-outline-secondary btn-login d-flex'
+            >
+                <i class='bi bi-google'></i>
+                <span class='flex-1'>Đăng nhập với Google</span>
+            </button>
+            <button
+                type='button'
+                class='btn btn-outline-secondary btn-login d-flex'
+            >
+                <i class='bi bi-facebook'></i>
+                <span class='flex-1'>Đăng nhập với Facebook</span>
+            </button><button
+                type='button'
+                class='btn btn-outline-secondary btn-login d-flex'
+            >
+                <i class='bi bi-github'></i>
+                <span class='flex-1'>Đăng nhập với Github</span>
+            </button>
+            <span class='mt-5'>
+                Đăng chưa có tài khoản?
+                <a class='text-decor-underline' href='/auth/register'>Đăng ký</a>
+            </span>
+            <a class='mt-2 text-decor-underline' href='/'>Quên mật khẩu?</a>
+            <p class='mt-4 term'>Việc bạn tiếp tục sử dụng trang web này đồng
+                nghĩa bạn đồng ý với
+                <a href='/'>điều khoản sử dụng</a>
+                của chúng tôi
+            </p>
+        </div>
+    </div>
+</div>

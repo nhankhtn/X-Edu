@@ -1,0 +1,164 @@
+<div class='mt-4 container-lessons'>
+    <div
+        class='lessons-header d-flex align-items-center justify-content-between'
+    >
+        <h3 class='title-course'>{{course.name}}</h3>
+        <h3 class='title-section'>Chương
+            {{section.sectionNumber}}
+            {{section.title}}</h3>
+        <button
+            class='btn btn-primary'
+            data-target='#add-lesson-modal'
+            data-toggle='modal'
+        >
+            Add lesson
+        </button>
+    </div>
+    <div class='row'>
+        <div class='container-fluid'>
+            <div class='row mt-5'>
+                {{#each lessons}}
+                    <div class='col-sm-6 col-lg-3 wrapper-lesson'>
+                        <div
+                            class='card card-course-item d-flex flex-column h-100 position-relative'
+                        >
+                            <video
+                                {{! autoplay
+                                controls }}
+                                class='card-img-top h-100 flex-1'
+                                src='{{this.url}}'
+                            ></video>
+                            {{! <button class="btn btn-play">
+                                <i class="bi bi-play-circle"></i>
+                            </button> }}
+                            <div class='body-lesson d-flex'>
+                                <h5
+                                    class='title-lesson flex-1 d-flex align-items-center'
+                                >{{this.title}}</h5>
+                                <button
+                                    class='btn btn-customize more-icon'
+                                    data-id='{{this.lessonNumber}}'
+                                >
+                                    <i class='bi bi-three-dots-vertical'></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    <button
+        class='btn btn-primary mx-auto mt-4 btn-back'
+        type='button'
+    >Back</button>
+</div>
+{{! Modal add lesson  }}
+<div id='add-lesson-modal' class='modal' tabindex='-1' role='dialog'>
+    <div class='modal-dialog' role='document'>
+        <form
+            action='/courses/{{course.id}}/section/{{section.sectionNumber}}/lesson/store'
+            method='POST'
+            enctype='multipart/form-data'
+        >
+            <div class='modal-content'>
+                <div class='modal-header'>
+                    <h5 class='modal-title'>
+                        Add lesson
+                    </h5>
+                    <button
+                        type='button'
+                        class='close'
+                        data-dismiss='modal'
+                        aria-label='Close'
+                    >
+                        <span aria-hidden='true'>
+                            &times;
+                        </span>
+                    </button>
+                </div>
+                <div class='modal-body'>
+                    <div class='form-group'>
+                        <label for='title'>Title</label>
+                        <input
+                            type='text'
+                            class='form-control'
+                            id='title'
+                            name='title'
+                        />
+                    </div>
+                    <div class='form-group'>
+                        <label for='video'>Video</label>
+                        <input
+                            type='file'
+                            class='form-control'
+                            id='video'
+                            name='video'
+                            accept='video/*'
+                        />
+                    </div>
+                </div>
+                <div class='modal-footer'>
+                    <button
+                        id='btn-add-lesson'
+                        type='submit'
+                        class='btn btn-primary'
+                    >
+                        Add
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{{! Modal edit lesson  }}
+{{! <div id='edit-modal' class='modal' tabindex='-1' role='dialog'>
+    <div class='modal-dialog' role='document'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <h5 class='modal-title'>
+                </h5>
+                <button
+                    type='button'
+                    class='close'
+                    data-dismiss='modal'
+                    aria-label='Close'
+                >
+                    <span aria-hidden='true'>
+                        &times;
+                    </span>
+                </button>
+            </div>
+            <div class='modal-body'>
+                <form name='edit-course-form' method='POST'>
+                </form>
+            </div>
+            <div class='modal-footer'>
+                <button
+                    type='button'
+                    class='btn btn-secondary'
+                    data-dismiss='modal'
+                >
+                    Cancel
+                </button>
+                <button
+                    id='btn-confirm-edit'
+                    type='button'
+                    class='btn btn-primary'
+                >
+                    Confirm
+                </button>
+            </div>
+        </div>
+    </div>
+</div> }}
+{{>ModalEditItem}}
+{{> ModalDeleteItem}}
+<form name='delete-item-form' method='POST'></form>
+<script>
+    const courseId =
+    {{{json course.id}}}
+    const sectionId =
+    {{{json section.sectionNumber}}}
+</script>
+<script type="module" src='/js/courses/lesson.js'></script>

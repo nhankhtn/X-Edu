@@ -1,0 +1,241 @@
+<form
+    class='mt-4'
+    name='container-form'
+    method='POST'
+    action='/courses/handle-form-actions'
+>
+    <div class='d-flex'>
+        <div class='flex-1'>
+            <h3>My courses</h3>
+            <a href='/admin/trash/courses'>Recycle bin
+                {{countDeletedCourses}}</a>
+        </div>
+        <button
+            class='btn btn-primary my-auto'
+            data-target='#add-course-modal'
+            data-toggle='modal'
+            type='button'
+        >
+            Add course
+        </button>
+    </div>
+
+    <div class='mt-4 d-flex align-items-center'>
+        <div class='form-check'>
+            <input
+                class='form-check-input'
+                type='checkbox'
+                value=''
+                id='checkbox-all'
+            />
+            <label class='form-check-label' for='checkbox-all'>
+                Select all
+            </label>
+        </div>
+
+        <select
+            class='form-control form-control-sm checkbox-select-all-options'
+            name='action'
+            required
+        >
+            <option value=''>-- Action --</option>
+            <option value='delete'>Delete</option>
+        </select>
+
+        <button
+            class='btn btn-primary btn-sm btn-check-all-submit'
+            disabled
+        >Thực hiện</button>
+    </div>
+
+    <table class='table mt-4'>
+        <thead>
+            <tr>
+                <th scope='col'>
+                    #
+                </th>
+                <th scope='col'>
+                    STT
+                    {{{sortable 'id' _sort}}}
+                </th>
+                <th scope='col'>
+                    Name
+                    {{{sortable 'name' _sort}}}
+                </th>
+                <th scope='col'>
+                    Description
+                    {{{sortable 'description' _sort}}}
+                </th>
+                <th scope='col'>
+                    Price
+                    {{{sortable 'price' _sort}}}
+                </th>
+                <th scope='col'>
+                    Time
+                    {{{sortable 'createdAt' _sort}}}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {{#each courses}}
+                <tr>
+                    <td>
+                        <div class='form-check'>
+                            <input
+                                class='form-check-input'
+                                type='checkbox'
+                                name='courseIds[]'
+                                value='{{this.id}}'
+                                id=''
+                            />
+                        </div>
+                    </td>
+                    <th scope='row'>
+                        {{this.id}}
+                    </th>
+                    <td>
+                        <a
+                            href='/courses/{{this.id}}/sections'
+                            class='text-dark'
+                        >
+                            {{this.name}}
+                        </a>
+                    </td>
+                    <td>
+                        <a
+                            href='/courses/{{this.id}}/sections'
+                            class='text-dark'
+                        >
+                            {{this.description}}
+                        </a>
+                    </td>
+                    <td>
+                        {{{formatCurrency this.price 'VND'}}}
+                    </td>
+                    <td>
+                        {{{getDate this.createdAt}}}
+                        {{{getTime this.createdAt}}}
+                    </td>
+                    <td>
+                        <span class='more-icon p-2' data-id='{{this.id}}'>
+                            <i class='bi bi-three-dots-vertical'></i>
+                        </span>
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</form>
+
+
+{{> ModalEditItem}}
+{{> ModalDeleteItem}}
+{{! Form add course  }}
+<div id='add-course-modal' class='modal' tabindex='-1' role='dialog'>
+    <div class='modal-dialog' role='document'>
+        <form
+            action='/courses/store'
+            method='POST'
+            enctype='multipart/form-data'
+        >
+            <div class='modal-content'>
+                <div class='modal-header'>
+                    <h5 class='modal-title'>
+                        Add course
+                    </h5>
+                    <button
+                        type='button'
+                        class='close'
+                        data-dismiss='modal'
+                        aria-label='Close'
+                    >
+                        <span aria-hidden='true'>
+                            &times;
+                        </span>
+                    </button>
+                </div>
+                <div class='modal-body'>
+                    <div class='form-group'>
+                        <label for='name'>Name</label>
+                        <input
+                            type='text'
+                            class='form-control'
+                            id='name'
+                            name='name'
+                        />
+                    </div>
+                    <div class='form-group'>
+                        <label for='description'>Description</label>
+                        <input
+                            type='text'
+                            class='form-control'
+                            id='description'
+                            name='description'
+                        />
+                    </div>
+                    <div class='form-group'>
+                        <label for='video'>Video introduce</label>
+                        <input
+                            type='file'
+                            class='form-control'
+                            id='video'
+                            name='video'
+                            accept='video/*'
+                        />
+                    </div>
+                    <div class='form-group'>
+                        <label for='target'>Target</label>
+                        <ul id='targets-course'></ul>
+                        <input type='text' class='form-control' id='target' />
+                        <input
+                            type='hidden'
+                            id='targets-input'
+                            name='targets'
+                        />
+                        <button
+                            type='button'
+                            class='btn btn-primary mt-1'
+                            id='btn-add-target'
+                        >Add target</button>
+                    </div>
+                    <div class='form-group'>
+                        <label for='category'>Category</label>
+                        <select class='form-control' id='category'>
+                            <option>Free</option>
+                            <option>Pro</option>
+                        </select>
+                        <input
+                            type='hidden'
+                            id='category-input'
+                            name='category'
+                        />
+                    </div>
+                    <div class='form-group form-price d-none'>
+                        <label for='price'>Price</label>
+                        <input
+                            type='text'
+                            class='form-control'
+                            id='price'
+                            name='price'
+                            placeholder='Enter price course...'
+                        />
+                        <span class='text-danger warning-price'></span>
+                    </div>
+                </div>
+                <div class='modal-footer'>
+                    <button
+                        id='btn-add-course'
+                        type='submit'
+                        class='btn btn-primary'
+                    >
+                        Add
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<form name='delete-item-form' method='POST'></form>
+<script type="module" src='/js/admin/stored-courses.js'></script>

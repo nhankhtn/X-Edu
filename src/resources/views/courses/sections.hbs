@@ -1,0 +1,92 @@
+<div class='mt-4 container-sections'>
+    <div class="sections-header d-flex align-items-center mb-4">
+        <h3 class="flex-1">{{course.name}}</h3>
+        <button 
+            class="btn btn-primary"
+            data-target="#add-section-modal"
+            data-toggle='modal'
+        >
+            Add section
+        </button>
+    </div>
+    <div class='row'>
+        <div class='container-fluid'>
+            <div class='row mt-3 wrapper-sections'>
+                {{#each sections}}
+                    <div class='col-sm-6 col-lg-4  wrapper-item'>
+                        <div class="h-100 w-100 d-flex align-items-center pl-4 section-item">
+                            <a 
+                                href="/courses/{{../course.id}}/section/{{this.sectionNumber}}/lessons"
+                                class="title-section d-flex align-items-center flex-1 h-100 text-dark text-decor-none"
+                            >
+                                    Chương {{this.sectionNumber}}: {{this.title}}
+                            </a>
+                            <button class="btn btn-customize more-icon" data-id='{{this.sectionNumber}}'>
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </button>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>          
+        </div>
+    </div>
+    <a 
+        href="/admin/stored/courses"
+        class="btn btn-primary mx-auto mt-4 btn-back" 
+        type="button"
+    >Back</a>
+</div>
+
+{{!-- Modal add section  --}}
+<div id='add-section-modal' class='modal' tabindex='-1' role='dialog'>
+    <div class='modal-dialog' role='document'>
+        <form action="/courses/{{course.id}}/section/store" method="POST">
+            <div class='modal-content'>
+                <div class='modal-header'>
+                    <h5 class='modal-title'>
+                        Add section
+                    </h5>
+                    <button
+                        type='button'
+                        class='close'
+                        data-dismiss='modal'
+                        aria-label='Close'
+                    >
+                        <span aria-hidden='true'>
+                            &times;
+                        </span>
+                    </button>
+                </div>
+                <div class='modal-body'>
+                    <div class='form-group'>
+                        <label for='title'>Title</label>
+                        <input
+                            type='text'
+                            class='form-control'
+                            id='title'
+                            name='title'
+                        />
+                    </div>
+                </div> 
+                <div class='modal-footer'>
+                    <button
+                        id='btn-add-section'
+                        type='submit'
+                        class='btn btn-primary'
+                    >
+                        Add
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{{!-- Modal edit section  --}}
+{{>ModalEditItem}}
+{{!-- Modal delete section  --}}
+{{> ModalDeleteItem}}
+<form name='delete-item-form' method='POST'></form>
+<script>
+    const courseId = {{{json course.id}}}
+</script>
+<script type="module" src="/js/courses/section.js"></script>

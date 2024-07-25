@@ -1,0 +1,125 @@
+<div class='mt-4'>
+
+    <div>
+        <h3>My courses</h3>
+        <a href='/admin/stored/courses'>Back</a>
+    </div>
+
+    <table class='table mt-4'>
+        <thead>
+            <tr>
+                <th scope='col'>
+                    #
+                </th>
+                <th scope='col'>
+                    Name
+                </th>
+                <th scope='col'>
+                    Description
+                </th>
+                <th scope='col'>
+                    Price
+                </th>
+                <th scope='col' colspan='2'>
+                    Time
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {{#each courses}}
+                <tr>
+                    <th scope='row'>
+                        {{this.id}}
+                    </th>
+                    <td>
+                        {{this.name}}
+                    </td>
+                    <td>
+                        {{this.description}}
+                    </td>
+                    <td>
+                        {{this.price}}
+                    <td>
+                        {{this.createdAt}}
+                    </td>
+                    <td>
+                        <a
+                            href=''
+                            class='btn btn-link btn-restore'
+                            data-id='{{this.id}}'
+                        >
+                            Restore
+                        </a>
+                        <a
+                            href=''
+                            class='btn btn-link'
+                            data-toggle='modal'
+                            data-id='{{this.id}}'
+                            data-target='#delete-course-modal'
+                        >
+                            Delete permanently
+                        </a>
+                    </td>
+                </tr>
+            {{else}}
+                <tr>
+                    <td colspan='5' class='text-center'>
+                        Empty trash!
+                        <a href='/admin/stored/courses'>Back</a>
+                    </td>
+                </tr>
+            {{/each}}
+
+        </tbody>
+    </table>
+</div>
+
+{{! Confirm delete modal }}
+<div id='delete-course-modal' class='modal' tabindex='-1' role='dialog'>
+    <div class='modal-dialog' role='document'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <h5 class='modal-title'>
+                    Confirm
+                </h5>
+                <button
+                    type='button'
+                    class='close'
+                    data-dismiss='modal'
+                    aria-label='Close'
+                >
+                    <span aria-hidden='true'>
+                        &times;
+                    </span>
+                </button>
+            </div>
+            <div class='modal-body'>
+                <p>
+                    Sure delete course
+                </p>
+            </div>
+            <div class='modal-footer'>
+                <button
+                    type='button'
+                    class='btn btn-secondary'
+                    data-dismiss='modal'
+                >
+                    Cancel
+                </button>
+                <button
+                    id='btn-delete-course'
+                    type='button'
+                    class='btn btn-danger'
+                >
+                    Delete permanently
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form name='delete-course-form' method='POST'></form>
+<form name='restore-course-form' method='POST'></form>
+
+<script src="/js/admin/trash-courses.js"></script>

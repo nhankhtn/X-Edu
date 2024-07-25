@@ -1,0 +1,85 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+body {
+  background-color: #fff;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) 30%), radial-gradient(rgba(255, 209, 82, 0.1) 30%, rgba(238, 154, 185, 0.1), rgba(226, 105, 150, 0.1) 40%, transparent 50%), radial-gradient(rgba(241, 241, 241, 0.1) 30%, transparent 40%), linear-gradient(155deg, transparent 60%, rgba(37, 212, 102, 0.1) 80%), linear-gradient(45deg, rgba(162, 183, 209, 0.1), rgba(115, 169, 220, 0.1)), radial-gradient(rgba(207, 153, 255, 0.1) 30%, transparent 40%), linear-gradient(155deg, transparent 60%, rgba(142, 70, 49, 0.1) 80%), linear-gradient(45deg, rgba(0, 101, 224, 0.1), rgba(15, 139, 255, 0.1));
+  background-position: bottom left, 109% 68%, 109% 68%, center, center; }
+
+body {
+  position: relative;
+  overflow-y: auto; }
+
+body::-webkit-scrollbar {
+  width: 8px;
+  height: 8px; }
+
+body::-webkit-scrollbar-track {
+  background: #f1f1f1; }
+
+body::-webkit-scrollbar-thumb {
+  background: #afacac;
+  border-radius: 4px; }
+
+body::-webkit-scrollbar-thumb:hover {
+  background: #7a7676; }
+
+.logo {
+  width: 32px;
+  height: 32px; }
+
+.note-message {
+  text-align: center; }
+
+.term {
+  font-size: 12px; }
+
+.btn-login,
+.btn-register {
+  width: 360px;
+  margin-top: 8px;
+  border-radius: 32px; }
+
+.form-register {
+  width: 360px;
+  margin-top: 8px;
+  border-radius: 32px; }
+
+.btn-back {
+  position: absolute;
+  top: 16;
+  left: 16; }
+
+.icon-warning {
+  margin-left: -32px; }
+
+.message-warning {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5; }
+
+.text-login {
+  font-size: 15px;
+  font-weight: 600; }
+
+.method {
+  cursor: pointer;
+  font-weight: 500;
+  opacity: 0.7;
+  font-size: 13px;
+  text-decoration: underline; }
+
+.country {
+  width: 96px;
+  border-right: 1px solid #333; }
+  .country select {
+    border: 0;
+    outline: none; }
+    .country select:focus, .country select:focus-visible {
+      border: 0;
+      outline: none; }
+
+#phone {
+  outline: none;
+  border: 0; }
+  #phone:focus, #phone:focus-visible {
+    outline: none;
+    border: 0; }

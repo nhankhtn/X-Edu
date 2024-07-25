@@ -1,0 +1,73 @@
+<div class='wrapper-learning'>
+    <div class='wrapper-lesson-learning'>
+        <div class='player w-100 h-100 position-relative'>
+            <div class='learning-center w-100 h-100'>
+                <video autoplay controls id='video-lesson' class='w-100 h-100'>
+                    <source src='{{lessonCurrent.url}}' type='video/mp4' />
+                </video>
+            </div>
+            {{! <div class='react-player w-100 h-100'>
+                <div
+                    class='d-flex align-items-center justify-content-center icon-play'
+                >
+                    <i class='bi bi-play-fill'></i>
+                </div>
+            </div> }}
+        </div>
+    </div>
+    <div class='content'>
+        <div
+            class='content-top d-flex align-items-center justify-content-between'
+        >
+            <div class='content-wrapper'>
+                <h1>{{lessonCurrent.title}}</h1>
+                <p class='updated'>Cập nhật tháng 11 năm 2022</p>
+            </div>
+            <button class='btn d-flex btn-add-note'>
+                <i class='bi bi-plus'></i>
+                <span class='mx-1'>Thêm ghi chú tại</span>
+                <span class='time'>00:00:00</span>
+            </button>
+        </div>
+        <div>
+            <p class='my-4'>Tham gia các cộng đồng để cùng học hỏi, chia sẻ và
+                "thám thính" xem F8 sắp có gì mới nhé!</p>
+            <ul class='pl-4'>
+                <li>
+                    Fanpage:
+                    <a
+                        class='color-main'
+                        href='https://www.facebook.com/Fullstack.edu.vn'
+                        target='_blank'
+                    >https://www.facebook.com/Fullstack.edu.vn</a>
+                </li>
+                <li>
+                    Group:
+                    <a
+                        class='color-main'
+                        href='https://www.facebook.com/groups/fullstack.edu.vn'
+                        target='_blank'
+                    >https://www.facebook.com/groups/fullstack.edu.vn</a>
+                </li>
+                <li>
+                    Website:
+                    <a
+                        class='color-main'
+                        href='https://fullstack.edu.vn'
+                        target='_blank'
+                    >https://fullstack.edu.vn</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class='wrapper-bottom'>
+        Made with
+        <i class='bi bi-suit-heart-fill'></i>
+        <span>.</span>
+        Powered by F8
+    </div>
+</div>
+<script>
+    const lessons =
+    {{{json lessons}}};
+</script>
