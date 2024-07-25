@@ -58,6 +58,7 @@ app.engine(
       path.join(__dirname, "resources/views/partials/learning"),
       path.join(__dirname, "resources/views/partials/landing"),
       path.join(__dirname, "resources/views/partials/profile"),
+      path.join(__dirname, "resources/views/partials/settings"),
       path.join(__dirname, "resources/views/components"),
     ],
   }),

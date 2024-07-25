@@ -74,6 +74,14 @@ class SiteController {
       layout: "profile"
     });
   }
+
+  // [GET] /settings
+  async settings(req, res, next) {
+    res.render("sites/settings", {
+      user: req.session.user,
+      layout: "settings"
+    });
+  }
 }
 
 module.exports = new SiteController();

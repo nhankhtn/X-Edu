@@ -11,7 +11,6 @@ const Course = new Schema(
     id: { type: Number },
     name: { type: String, required: true },
     description: { type: String },
-    targets: { type: [String] },
     videoIntro: { type: String, required: true },
     slug: { type: String, slug: "name", unique: true },
     userId: { type: String, ref: "User", required: true },

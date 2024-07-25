@@ -42,7 +42,6 @@ class CourseController {
       const course = new Course({
         name: req.body.name.trim(),
         description: req.body.description.trim(),
-        targets: JSON.parse(req.body.targets),
         videoIntro: req.file.path,
         category: req.body.category,
         price: +req.body.price,
@@ -50,6 +49,7 @@ class CourseController {
         options: {
           totalTime: 0, // seconds
           totalStudent: 0,
+          targets: JSON.parse(req.body.targets),
         }
       });
       await course.save();
