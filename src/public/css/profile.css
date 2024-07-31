@@ -4,6 +4,37 @@
   font-size: 12px;
   color: #808990; }
 
+.header-profile .logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 16px;
+  object-fit: cover; }
+
+.header-profile .notify-btn {
+  font-size: 20px;
+  color: #707070;
+  background-color: transparent; }
+
+.header-profile .user-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  margin-right: 4px; }
+
+.header-profile .dropdown-menu {
+  min-width: 240px;
+  left: -180px; }
+  .header-profile .dropdown-menu .user-avatar {
+    width: 40px;
+    height: 40px; }
+  .header-profile .dropdown-menu .username {
+    font-size: 16px;
+    font-weight: 600;
+    color: #292929; }
+  .header-profile .dropdown-menu .email {
+    font-size: 14px;
+    color: #757575; }
+
 .container-profile {
   min-height: 100vh;
   padding: 0 200px;

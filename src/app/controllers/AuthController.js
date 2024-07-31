@@ -1,8 +1,4 @@
-const Course = require("../models/Course");
 const User = require("../models/User");
-const { mutipleMongooseToObject } = require("../../utils/mongoose");
-const { cloudinary } = require("../../configs/db")
-// const { registerWithEmailAndPassword, loginWithEmailAndPassword } = require("../../utils/firebase");
 
 class AuthController {
     // [GET] /auth/login

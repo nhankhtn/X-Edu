@@ -9,7 +9,7 @@ const Schema = mongoose.Schema;
 const Progress = new Schema(
     {
         userId: { type: String, ref: "User", required: true },
-        courseId: { type: Number, ref: "Course", required: true },
+        course: { type: String, required: true },
         lessonLatest: { type: Number, required: true },
         progress: { type: Number, default: 0 },
     },

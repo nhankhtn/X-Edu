@@ -12,7 +12,7 @@
                     data-interval='10000'
                 >
                     <img
-                        src='/img/min.jpg'
+                        src='https://th.bing.com/th/id/OIP.SYq1khSGoX8u_8eSDjSFmgHaE_?rs=1&pid=ImgDetMain'
                         class='d-block w-100 h-100 img-slider'
                         alt='...'
                     />
@@ -23,7 +23,7 @@
                     data-interval='10000'
                 >
                     <img
-                        src='/img/min1.jpg'
+                        src='https://th.bing.com/th/id/OIP.OiJlx3T6DTV6fQvYZi2o_QHaFj?rs=1&pid=ImgDetMain'
                         class='d-block w-100 h-100 img-slider'
                         alt='...'
                     />
@@ -66,14 +66,14 @@
             </button>
         </div>
         <ul class='slick-dots d-flex m-0'>
-            <li class='mr-2'>
-                <button class='btn p-0 w-100 h-100'></button>
+            <li class='mr-2 active'>
+                <button class='btn p-0 w-100'></button>
             </li>
             <li class='mr-2'>
-                <button class='btn p-0 w-100 h-100'></button>
+                <button class='btn p-0 w-100'></button>
             </li>
             <li class='mr-2'>
-                <button class='btn p-0 w-100 h-100'></button>
+                <button class='btn p-0 w-100'></button>
             </li>
         </ul>
         <div class='container-fluid'>
@@ -202,4 +202,8 @@
         </div>
     </div>
 </div>
-<script src='/js/site/home.js'></script>
+<script>
+    const user = {{{json user}}} ?? {}
+    const courses = {{{json courses}}} ?? {}
+</script>
+<script type="module" src='/js/sites/home.js'></script>

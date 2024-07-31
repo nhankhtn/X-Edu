@@ -6,210 +6,6 @@
         </button>
     </header>
     <div class='body flex-1'>
-        {{!-- <div class='wrapper-lessons'>
-            <h3 class='mt-0 title'>1. Khái niệm kỹ thuật cần biết</h3>
-            <span class='desc'>
-                0/3 | 23:09
-            </span>
-            <button class='btn btn-light border-0 icon'>
-                <i class='bi bi-chevron-down'></i>
-                {{! <i class='bi bi-chevron-up'></i> }}
-            </button>
-        </div>
-        <div class='wrapper-lessons'>
-            <h3 class='mt-0 title'>2. Môi trường, con người IT</h3>
-            <span class='desc'>
-                0/3 | 23:09
-            </span>
-            <button
-                type='button'
-                class='btn btn-light border-0 icon'
-                data-toggle='collapse'
-                data-target='#lessons-1'
-                aria-expanded='false'
-                aria-controls='lessons-1'
-            >
-                <i class='bi bi-chevron-down'></i>
-                {{! <i class='bi bi-chevron-up'></i> }}
-            </button>
-        </div>
-        <div class='collapse track-steps' id='lessons-1'>
-            <div class='wrapper-lesson-items d-flex active'>
-                <div class='info-item flex-1 d-flex flex-column'>
-                    <h3 class='mb-0'>1. Mô hình Client- Server là gì?</h3>
-                    <p class='mb-0 action-item mt-1'>
-                        <i class='bi bi-record-circle d-none icon-play'></i>
-                        {{! <i class='bi bi-play-circle d-none'></i>  }}
-                        {{! <i class='bi bi-file-earmark-ppt-fill'></i> }}
-                        <span>11:35</span>
-                    </p>
-                </div>
-                <div class='d-none icon-lock'>
-                    <svg
-                        aria-hidden='true'
-                        focusable='false'
-                        data-prefix='fas'
-                        data-icon='lock'
-                        class='svg-inline--fa fa-lock _state-icon_1seu0_82 _lock_1seu0_87'
-                        role='img'
-                        xmlns='http://www.w3.org/2000/svg'
-                        viewBox='0 0 448 512'
-                    ><path
-                            fill='currentColor'
-                            d='M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z'
-                        ></path></svg>
-                </div>
-            </div>
-            <div class='wrapper-lesson-items d-flex locked'>
-                <div class='info-item flex-1 d-flex flex-column'>
-                    <h3 class='mb-0'>1. Domain là gì? Tên miền là gì?</h3>
-                    <p class='mb-0 action-item mt-1'>
-                        {{! <i class='bi bi-record-circle'></i> }}
-                        <i class='bi bi-play-circle'></i>
-                        {{! <i class='bi bi-file-earmark-ppt-fill'></i> }}
-                        <span>11:35</span>
-                    </p>
-                </div>
-                <div class='d-none icon-lock'>
-                    <svg
-                        aria-hidden='true'
-                        focusable='false'
-                        data-prefix='fas'
-                        data-icon='lock'
-                        class='svg-inline--fa fa-lock _state-icon_1seu0_82 _lock_1seu0_87'
-                        role='img'
-                        xmlns='http://www.w3.org/2000/svg'
-                        viewBox='0 0 448 512'
-                    ><path
-                            fill='currentColor'
-                            d='M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z'
-                        ></path></svg>
-                </div>
-            </div>
-            <div class='wrapper-lesson-items d-flex locked'>
-                <div class='info-item flex-1 d-flex flex-column'>
-                    <h3 class='mb-0'>1. Mô hình Client- Server là gì?</h3>
-                    <p class='mb-0 action-item mt-1'>
-                        {{! <i class='bi bi-record-circle'></i> }}
-                        {{! <i class='bi bi-play-circle'></i> }}
-                        <i class='bi bi-file-earmark-ppt-fill'></i>
-                        <span>11:35</span>
-                    </p>
-                </div>
-                <div class='d-none icon-lock'>
-                    <svg
-                        aria-hidden='true'
-                        focusable='false'
-                        data-prefix='fas'
-                        data-icon='lock'
-                        class='svg-inline--fa fa-lock _state-icon_1seu0_82 _lock_1seu0_87'
-                        role='img'
-                        xmlns='http://www.w3.org/2000/svg'
-                        viewBox='0 0 448 512'
-                    ><path
-                            fill='currentColor'
-                            d='M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z'
-                        ></path></svg>
-                </div>
-            </div>
-        </div>
-        <div class='wrapper-lessons'>
-            <h3 class='mt-0 title'>2. Môi trường, con người IT</h3>
-            <span class='desc'>
-                0/3 | 23:09
-            </span>
-            <button
-                type='button'
-                class='btn btn-light border-0 icon'
-                data-toggle='collapse'
-                data-target='#lessons-2'
-                aria-expanded='false'
-                aria-controls='lessons-2'
-            >
-                <i class='bi bi-chevron-down'></i>
-                {{! <i class='bi bi-chevron-up'></i> }}
-            </button>
-        </div>
-        <div class='collapse track-steps' id='lessons-2'>
-            <div class='wrapper-lesson-items d-flex active'>
-                <div class='info-item flex-1 d-flex flex-column'>
-                    <h3 class='mb-0'>1. Mô hình Client- Server là gì?</h3>
-                    <p class='mb-0 action-item mt-1'>
-                        <i class='bi bi-record-circle d-none icon-play'></i>
-                        {{! <i class='bi bi-play-circle d-none'></i>  }}
-                        {{! <i class='bi bi-file-earmark-ppt-fill'></i> }}
-                        <span>11:35</span>
-                    </p>
-                </div>
-                <div class='d-none icon-lock'>
-                    <svg
-                        aria-hidden='true'
-                        focusable='false'
-                        data-prefix='fas'
-                        data-icon='lock'
-                        class='svg-inline--fa fa-lock _state-icon_1seu0_82 _lock_1seu0_87'
-                        role='img'
-                        xmlns='http://www.w3.org/2000/svg'
-                        viewBox='0 0 448 512'
-                    ><path
-                            fill='currentColor'
-                            d='M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z'
-                        ></path></svg>
-                </div>
-            </div>
-            <div class='wrapper-lesson-items d-flex locked'>
-                <div class='info-item flex-1 d-flex flex-column'>
-                    <h3 class='mb-0'>1. Domain là gì? Tên miền là gì?</h3>
-                    <p class='mb-0 action-item mt-1'>
-                        {{! <i class='bi bi-record-circle'></i> }}
-                        <i class='bi bi-play-circle'></i>
-                        {{! <i class='bi bi-file-earmark-ppt-fill'></i> }}
-                        <span>11:35</span>
-                    </p>
-                </div>
-                <div class='d-none icon-lock'>
-                    <svg
-                        aria-hidden='true'
-                        focusable='false'
-                        data-prefix='fas'
-                        data-icon='lock'
-                        class='svg-inline--fa fa-lock _state-icon_1seu0_82 _lock_1seu0_87'
-                        role='img'
-                        xmlns='http://www.w3.org/2000/svg'
-                        viewBox='0 0 448 512'
-                    ><path
-                            fill='currentColor'
-                            d='M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z'
-                        ></path></svg>
-                </div>
-            </div>
-            <div class='wrapper-lesson-items d-flex locked'>
-                <div class='info-item flex-1 d-flex flex-column'>
-                    <h3 class='mb-0'>1. Mô hình Client- Server là gì?</h3>
-                    <p class='mb-0 action-item mt-1'>
-                        {{! <i class='bi bi-record-circle'></i> }}
-                        {{! <i class='bi bi-play-circle'></i> }}
-                        <i class='bi bi-file-earmark-ppt-fill'></i>
-                        <span>11:35</span>
-                    </p>
-                </div>
-                <div class='d-none icon-lock'>
-                    <svg
-                        aria-hidden='true'
-                        focusable='false'
-                        data-prefix='fas'
-                        data-icon='lock'
-                        class='svg-inline--fa fa-lock _state-icon_1seu0_82 _lock_1seu0_87'
-                        role='img'
-                        xmlns='http://www.w3.org/2000/svg'
-                        viewBox='0 0 448 512'
-                    ><path
-                            fill='currentColor'
-                            d='M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z'
-                        ></path></svg>
-                </div>
-            </div>
-        </div> --}}
         {{#each sections}}
             <div 
                 class='wrapper-lessons' 
@@ -218,7 +14,7 @@
                 aria-expanded='false'
                 aria-controls='lessons-{{@index}}'
             >
-                <h3 class='mt-0 title'>{{this.sectionNumber}}.
+                <h3 class='mb-0 title'>{{this.sectionNumber}}.
                     {{this.title}}</h3>
                 <span class='desc'>
                     {{countItemCompleted ../lessons this.sectionNumber ../progress.lessonLatest}}
@@ -229,8 +25,7 @@
                     type='button'
                     class='btn btn-light border-0 icon'
                 >
-                    <i class='bi bi-chevron-down'></i>
-                    {{! <i class='bi bi-chevron-up'></i> }}
+                    <i class='bi bi-chevron-down icon-expand'></i>
                 </button>
             </div>
             <div class='collapse track-steps' id='lessons-{{@index}}'>

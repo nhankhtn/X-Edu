@@ -16,7 +16,7 @@
                     <div class='col-sm-6 col-lg-4  wrapper-item'>
                         <div class="h-100 w-100 d-flex align-items-center pl-4 section-item">
                             <a 
-                                href="/courses/{{../course.id}}/section/{{this.sectionNumber}}/lessons"
+                                href="/courses/{{../course.slug}}/section/{{this.sectionNumber}}/lessons"
                                 class="title-section d-flex align-items-center flex-1 h-100 text-dark text-decor-none"
                             >
                                     Chương {{this.sectionNumber}}: {{this.title}}
@@ -40,7 +40,7 @@
 {{!-- Modal add section  --}}
 <div id='add-section-modal' class='modal' tabindex='-1' role='dialog'>
     <div class='modal-dialog' role='document'>
-        <form action="/courses/{{course.id}}/section/store" method="POST">
+        <form action="/courses/{{course.slug}}/section/store" method="POST">
             <div class='modal-content'>
                 <div class='modal-header'>
                     <h5 class='modal-title'>
@@ -87,6 +87,6 @@
 {{> ModalDeleteItem}}
 <form name='delete-item-form' method='POST'></form>
 <script>
-    const courseId = {{{json course.id}}}
+    const course = {{{json course}}}
 </script>
 <script type="module" src="/js/courses/section.js"></script>

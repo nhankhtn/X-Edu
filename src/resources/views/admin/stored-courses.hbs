@@ -36,6 +36,7 @@
         <select
             class='form-control form-control-sm checkbox-select-all-options'
             name='action'
+            title="action"
             required
         >
             <option value=''>-- Action --</option>
@@ -86,7 +87,7 @@
                                 class='form-check-input'
                                 type='checkbox'
                                 name='courseIds[]'
-                                value='{{this.id}}'
+                                value='{{this.slug}}'
                                 id=''
                             />
                         </div>
@@ -96,7 +97,7 @@
                     </th>
                     <td>
                         <a
-                            href='/courses/{{this.id}}/sections'
+                            href='/courses/{{this.slug}}/sections'
                             class='text-dark'
                         >
                             {{this.name}}
@@ -104,7 +105,7 @@
                     </td>
                     <td>
                         <a
-                            href='/courses/{{this.id}}/sections'
+                            href='/courses/{{this.slug}}/sections'
                             class='text-dark'
                         >
                             {{this.description}}
@@ -118,7 +119,7 @@
                         {{{getTime this.createdAt}}}
                     </td>
                     <td>
-                        <span class='more-icon p-2' data-id='{{this.id}}'>
+                        <span class='more-icon p-2' data-id='{{this.slug}}'>
                             <i class='bi bi-three-dots-vertical'></i>
                         </span>
                     </td>

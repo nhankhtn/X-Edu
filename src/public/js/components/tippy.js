@@ -12,7 +12,7 @@ export default function createTippy(selectorTarget, content = []) {
                         class='btn w-100 h-100 ${menuItems[i].class}'
                         data-toggle='modal'
                         data-id='${attrs.dataId}'
-                        data-target='${menuItems[i].modal}'
+                        data-target='${menuItems[i]?.modal}'
                         data-name='${menuItems[i]?.fieldName}'
                     >
                         ${menuItems[i].title}

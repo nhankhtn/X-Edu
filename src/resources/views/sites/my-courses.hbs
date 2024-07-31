@@ -1,0 +1,48 @@
+<div class='px-5 my-courses'>
+    <div class="top">
+        <h1 class="heading">Khoá học của tôi</h1>
+        <div class="mt-4 sub-heading">
+            <p>Bạn đã hoàn thành <strong>1/9</strong> khoá học của bạn</p>
+        </div>
+    </div>
+    <div class='container-fluid'>
+        <div class='row'>
+            {{#each courses}}
+            <div class='col-sm-6 col-lg-3 h-100 mt-4'>
+                <div
+                    data-id="{{this.id}}"
+                    class='card card-course-item h-100 border-0 position-relative'
+                >
+                    <a
+                        href='/courses/{{this.slug}}'
+                        class='course-item position-relative'
+                    >
+                        <img
+                            class='card-img-top img-course'
+                            src='https://th.bing.com/th/id/OIP.SYq1khSGoX8u_8eSDjSFmgHaE_?rs=1&pid=ImgDetMain'
+                        ></img>
+                    </a>
+                    <div class='card-body'>
+                        <h3 class='mb-0 card-title' >
+                            <a class="text-dark " href="/courses/{{this.slug}}">{{this.name}}</a>
+                        </h3>
+                        <div class="wrap-progress">
+                            <p class="last-completed">Bạn chưa học khoá này</p>
+                            <div class='d-none progress'>
+                                <div
+                                    class='progress-bar'
+                                    role='progressbar'
+                                    aria-valuemin='0'
+                                    aria-valuemax='100'
+                                    style="width: 30px"
+                                ></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+<script src="/js/sites/my-courses.js"></script>

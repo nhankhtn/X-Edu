@@ -1,4 +1,5 @@
 @import 'variables';
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css');
 
 body {
     overflow-y: hidden;
@@ -251,9 +252,6 @@ body {
         cursor: pointer;
     }
 
-    & .learning-center {
-    }
-
     & .react-player {
         background: url('https://i.ytimg.com/vi/zoELAirXMJY/maxresdefault.jpg')
             no-repeat center / cover;
@@ -274,10 +272,6 @@ body {
     & .content {
         padding: 0 8.5%;
         min-height: 400px;
-
-        // & > p {
-        //     margin: 16px 0;
-        // }
     }
 
     & .content-top {

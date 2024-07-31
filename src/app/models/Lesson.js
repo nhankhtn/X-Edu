@@ -5,14 +5,12 @@ const Schema = mongoose.Schema;
 
 const Lesson = new Schema(
   {
-    userId: { type: String, ref: "User", required: true },
-    courseId: { type: Number, ref: "Course", required: true },
-    sectionNumber: { type: Number, ref: "Section", required: true },
+    course: { type: String, unique: true },
+    sectionNumber: { type: Number, required: true },
     lessonNumber: { type: Number },
     title: { type: String, require: true },
     url: { type: String },
     options: { type: Object }
-    // primary key(userId, courseId, lessonNumber)
   },
   {
     timestamps: true

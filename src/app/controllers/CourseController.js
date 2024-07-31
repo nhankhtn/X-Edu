@@ -5,6 +5,7 @@ const Progress = require("../models/Progress");
 const { mongooseToObject, mutipleMongooseToObject } = require("../../utils/mongoose");
 const cloudinary = require("../../configs/db/cloudinary");
 
+
 class CourseController {
   // [GET] /courses/:slug
   async showCourse(req, res, next) {
@@ -13,13 +14,18 @@ class CourseController {
         slug: req.params.slug
       });
       const sections = await Section.find({
-        userId: course?.userId,
-        courseId: course?.id
+        course: req.params.slug
       });
       const lessons = await Lesson.find({
-        userId: course?.userId,
-        courseId: course?.id
+        course: req.params.slug
       });
+      const progress = await Progress.findOne({
+        userId: req.session.user?.id,
+        course: req.params.slug
+      })
+      if (progress) {
+        res.redirect(`/courses/learning/${req.params.slug}`)
+      }
 
       res.render("courses/show", {
         course: mongooseToObject(course),
@@ -29,11 +35,6 @@ class CourseController {
     } catch (error) {
       next(error);
     }
-  }
-
-  // [GET] /courses/create -> private
-  createCourse(req, res, next) {
-    res.render("courses/create");
   }
 
   // [POST] /courses/store -> private
@@ -60,16 +61,15 @@ class CourseController {
     }
   }
 
-  // [GET] /courses/:id/sections -> private
+  // [GET] /courses/:slug/sections -> private
   async showSections(req, res, next) {
     try {
       const course = await Course.findOne({
-        userId: req.session.user?.id,
-        id: req.params.id,
+        slug: req.params.slug
       });
+
       const sections = await Section.find({
-        userId: req.session.user?.id,
-        courseId: req.params.id,
+        course: req.params.slug
       })
 
       res.render("courses/sections", {
@@ -81,13 +81,12 @@ class CourseController {
     }
   }
 
-  // [POST] /courses/:id/section/store -> private
+  // [POST] /courses/:slug/section/store -> private
   async storeSection(req, res, next) {
     try {
       const section = new Section({
         title: req.body.title.trim(),
-        courseId: req.params.id,
-        userId: req.session.user?.id,
+        course: req.params.slug,
         options: {
           totalTime: 0
         }
@@ -99,12 +98,11 @@ class CourseController {
     }
   }
 
-  // [DELETE] /courses/:id/section/:idSection -> private
+  // [DELETE] /courses/:slug/section/:idSection -> private
   async deleteSection(req, res, next) {
     try {
       await Section.deleteOne({
-        userId: req.session.user?.id,
-        courseId: req.params.id,
+        course: req.params.slug,
         sectionNumber: req.params.idSection,
       });
       res.redirect("back");
@@ -113,35 +111,33 @@ class CourseController {
     }
   }
 
-  // [PATCH] /courses/:id/section/:idSection/edit -> private
+  // [PATCH] /courses/:slug/section/:idSection/edit -> private
   async editSection(req, res, next) {
     try {
       await Section.updateOne({
-        userId: req.session.user?.id,
-        courseId: req.params.id,
+        course: req.params.slug,
         sectionNumber: req.params.idSection,
-      }, req.body);
+      }, {
+        title: req.body.title.trim()
+      });
       res.redirect("back");
     } catch (error) {
       next(error);
     }
   }
 
-  // [GET] /courses/:id/section/:idSection/lessons -> private
+  // [GET] /courses/:slug/section/:idSection/lessons -> private
   async showLessons(req, res, next) {
     try {
       const course = await Course.findOne({
-        userId: req.session.user?.id,
-        id: req.params.id,
+        slug: req.params.slug
       });
       const section = await Section.findOne({
-        userId: req.session.user?.id,
-        courseId: req.params.id,
+        course: req.params.slug,
         sectionNumber: req.params.idSection,
       });
       const lessons = await Lesson.find({
-        userId: req.session.user?.id,
-        courseId: req.params.id,
+        course: req.params.slug,
         sectionNumber: req.params.idSection,
       });
 
@@ -155,16 +151,15 @@ class CourseController {
     }
   }
 
-  // [POST] /courses/:id/section/:idSection/lesson/store -> private
+  // [POST] /courses/:slug/section/:idSection/lesson/store -> private
   async storeLesson(req, res, next) {
     try {
       const result = await cloudinary.api.resource(req.file.filename, {
-        resource_type: 'video',
+        resource_type: 'auto',
         media_metadata: true,
       });
       const lesson = new Lesson({
-        userId: req.session.user?.id,
-        courseId: req.params.id,
+        course: req.params.slug,
         sectionNumber: req.params.idSection,
         title: req.body.title.trim(),
         url: req.file.path,
@@ -176,15 +171,13 @@ class CourseController {
       await lesson.save();
 
       await Course.updateOne({
-        userId: req.session.user?.id,
-        id: req.params.id,
+        slug: req.params.slug
       }, {
         $inc: { "options.totalTime": result.duration }
       });
 
       await Section.updateOne({
-        userId: req.session.user?.id,
-        courseId: req.params.id,
+        course: req.params.slug,
         sectionNumber: req.params.idSection,
       }, {
         $inc: { "options.totalTime": result.duration }
@@ -196,12 +189,11 @@ class CourseController {
     }
   }
 
-  // [DELETE] /courses/:id/section/:idSection/lesson/:idLesson -> private
+  // [DELETE] /courses/:slug/section/:idSection/lesson/:idLesson -> private
   async deleteLesson(req, res, next) {
     try {
       await Lesson.deleteOne({
-        userId: req.session.user?.id,
-        courseId: req.params.id,
+        course: req.params.slug,
         sectionNumber: req.params.idSection,
         lessonNumber: req.params.idLesson,
       });
@@ -211,18 +203,19 @@ class CourseController {
     }
   }
 
-  // [PATCH] /courses/:id/section/:idSection/lesson/:idLesson/edit/:slug
+  // [PATCH] /courses/:slug/section/:idSection/lesson/:idLesson/edit/:field
   async editLesson(req, res, next) {
     try {
-      const fieldUpdate = req.params.slug;
+      const fieldUpdate = req.params.field;
       const update = {};
+
       if (fieldUpdate === "title") {
         update.title = req.body.title.trim();
       } else if (fieldUpdate === "url") {
         update.url = req.file.path;
       }
       await Lesson.updateOne({
-        courseId: req.params.id,
+        course: req.params.slug,
         sectionNumber: req.params.idSection,
         lessonNumber: req.params.idLesson,
       }, update);
@@ -232,44 +225,44 @@ class CourseController {
     }
   }
 
-  // [DELETE] /courses/:id
+  // [DELETE] /courses/:slug
   async delete(req, res, next) {
     try {
-      await Course.delete({ id: req.params.id });
+      await Course.delete({ slug: req.params.slug });
       res.redirect("back");
     } catch (error) {
       next(error);
     }
   }
 
-  // [DELETE] /courses/:id/force
+  // [DELETE] /courses/:slug/force
   async forceDelete(req, res, next) {
     try {
-      await Course.deleteOne({ id: req.params.id });
+      await Course.deleteOne({ slug: req.params.slug });
       res.redirect("back");
     } catch (error) {
       next(error);
     }
   }
 
-  // [PATCH] /courses/:id/restore
+  // [PATCH] /courses/:slug/restore
   async restore(req, res, next) {
     try {
-      await Course.restore({ id: req.params.id });
+      await Course.restore({ slug: req.params.slug });
       res.redirect("back");
     } catch (error) {
       next(error);
     }
   }
-  // [PATCH] /courses/:id/edit/:slug
+  // [PATCH] /courses/:slug/edit/:field
   async editCourse(req, res, next) {
     try {
       // Chưa xử lí trường hợp thay đổi giá dẫn tới thay đổi category course 
       const update = {};
-      update[req.params.slug] = req.body["new-value"].trim();
+      update[req.params.field] = req.body[req.params.field].trim();
 
       await Course.updateOne(
-        { id: req.params.id },
+        { slug: req.params.slug },
         update
       );
 
@@ -296,41 +289,25 @@ class CourseController {
   }
 
   // [GET] /courses/learning/:slug
-  // [GET] /courses/learning/:slug?lesson=?
-  // Phân tích
-  /*
-  - Nếu người dùng click vô href /courses/learning/:slug thì sẽ chuyển hướng sang 
-  bài học hiện tại của người dùng (progress.lessonLatest) 
-  -> /courses/learning/:slug?id=progress.lessonLatest
-  - Nếu người dùng mới bắt đầu học thì sẽ chuyển hướng sang bài học đầu tiên của khóa học
-  và tạo một progress mới cho người dùng
-  -> /courses/learning/:slug?id=1
-  - Nếu người dùng truy cập vào href /courses/learning/:slug?id=2 thì sẽ chuyển hướng sang bài học thứ 2
-  của khóa học và cập nhật progress của người dùng
-  */
   async learningCourse(req, res, next) {
     try {
-
       const course = await Course.findOne({
         slug: req.params.slug
       });
       const sections = await Section.find({
-        userId: course?.userId,
-        courseId: course?.id
+        course: req.params.slug
       });
       const lessons = await Lesson.find({
-        userId: course?.userId,
-        courseId: course?.id
+        course: req.params.slug
       });
       let progress = await Progress.findOne({
         userId: req.session.user?.id,
-        courseId: course.id,
+        course: req.params.slug
       });
-
       if (!progress) {
         progress = new Progress({
           userId: req.session.user?.id,
-          courseId: course.id,
+          course: req.params.slug,
           lessonLatest: 1,
           progress: 0,
         });
@@ -343,6 +320,13 @@ class CourseController {
         await progress.save();
       }
       const lessonCurrent = lessons.find(lesson => lesson.lessonNumber === idQuery);
+      // Increase total student learned 
+      await Course.updateOne({
+        slug: req.params.slug
+      }, {
+        $inc: { "options.totalStudent": 1 }
+      })
+
       res.render("courses/learning", {
         course: mongooseToObject(course),
         sections: mutipleMongooseToObject(sections),
@@ -356,19 +340,25 @@ class CourseController {
     }
   }
   // Update progress of user in course when user click to quit course
-  // [PATCH] /courses/learning/:slug/progress/update
+  // [PATCH] /courses/progress/update
   async updateProgress(req, res, next) {
     try {
       await Progress.updateOne({
         _id: req.body.idProgress
-      }, {
-        progress: req.body.progress,
-      });
+      }, req.body.progress);
     } catch (error) {
       next(error);
     }
   }
-
+  // [GET] /courses/progresses/:userId
+  async getProgresses(req, res, next) {
+    try {
+      const progresses = await Progress.find({ userId: req.params.userId })
+      res.json(progresses)
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 module.exports = new CourseController();

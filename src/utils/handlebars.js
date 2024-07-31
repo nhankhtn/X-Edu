@@ -27,9 +27,6 @@ module.exports = {
     const output = `<a href="${href}">${icon}</a>`;
     return new handlebars.SafeString(output);
   },
-  hasUser(user) {
-    return user && user.id;
-  },
   isAdmin(user) {
     return user && user.role === "admin";
   },
@@ -99,6 +96,6 @@ module.exports = {
     return lessons.find(lesson => lesson.lessonNumber === lessonNumber).title;
   },
   percent(lessonLatest, lessons) {
-    return ((lessonLatest - 1) / lessons.length) * 100;
+    return Math.floor(((lessonLatest - 1) / lessons.length) * 100);
   }
 };

@@ -49,12 +49,12 @@ document.addEventListener("DOMContentLoaded", createTippy(
 document.addEventListener("DOMContentLoaded", function () {
     $("#edit-modal").on("show.bs.modal", function (e) {
         const lessonId = $(e.relatedTarget).data("id")
-        const clickedBtn = $(e.relatedTarget).data("name");
+        const fieldEdit = $(e.relatedTarget).data("name");
         const editForm = document.forms["edit-item-form"];
 
         $(this).find(".modal-title").text($(e.relatedTarget).text())
 
-        if (clickedBtn === "title") {
+        if (fieldEdit === "title") {
             $(editForm).append(`<input type='text' class='form-control' id='title' name="title"/>`)
         } else {
             $(editForm).append(`<input
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
             $(editForm).attr("enctype", "multipart/form-data")
         }
         $(this).find("#btn-confirm-edit").click(function (e) {
-            editForm.action = `/courses/${courseId}/section/${sectionId}/lesson/${lessonId}/edit/${clickedBtn}?_method=PATCH`
+            editForm.action = `/courses/${course.slug}/section/${sectionId}/lesson/${lessonId}/edit/${fieldEdit}?_method=PATCH`
             editForm.submit();
         })
     }).on("hidden.bs.modal", function (e) {

@@ -24,67 +24,152 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 // Header
-.navbar.fixed-top {
-    border-bottom: 1px solid #ccc;
-    z-index: 2;
-}
-.logo {
-    width: 40px;
-    height: 40px;
-    margin-right: 16px;
-    object-fit: cover;
-}
-.search-group {
-    width: 420px;
-}
-.input-search {
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
-}
-
-.btn-search {
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
-}
-.navbar-collapse {
-    flex-grow: 0 !important;
-}
-.user-avatar {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    margin-right: 4px;
-}
-.notify-btn {
-    font-size: 20px;
-    color: #707070;
-    background-color: transparent;
-}
-.btn-custom {
-    min-width: 84px;
-}
-
-.checkbox-select-all-options {
-    width: 112px;
-    margin: 0 16px;
-}
-.dropdown-menu {
-    min-width: 240px;
-    left: -180px;
-    // text-align: center;
-
-    & .user-avatar {
+.header {
+    & .navbar.fixed-top {
+        border-bottom: 1px solid #ccc;
+        z-index: 2;
+    }
+    & .logo {
         width: 40px;
         height: 40px;
+        margin-right: 16px;
+        object-fit: cover;
     }
-    & .username {
-        font-size: 16px;
-        font-weight: 600;
-        color: #292929;
+    & .search-group {
+        width: 420px;
     }
-    & .email {
+    & .input-search {
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px;
+    }
+
+    & .btn-search {
+        border-top-right-radius: 30px;
+        border-bottom-right-radius: 30px;
+    }
+    & .navbar-collapse {
+        flex-grow: 0 !important;
+    }
+    & .user-avatar {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        margin-right: 4px;
+    }
+    & .btn-my-course {
         font-size: 14px;
-        color: #757575;
+        font-weight: 600;
+        color: #333;
+    }
+    & .notify-btn {
+        font-size: 20px;
+        color: #707070;
+        background-color: transparent;
+    }
+    & .btn-custom {
+        min-width: 84px;
+        border-radius: 24px;
+    }
+
+    & .dropdown-menu {
+        min-width: 240px;
+        left: -180px;
+
+        & .user-avatar {
+            width: 40px;
+            height: 40px;
+        }
+        & .username {
+            font-size: 16px;
+            font-weight: 600;
+            color: #292929;
+        }
+        & .email {
+            font-size: 14px;
+            color: #757575;
+        }
+    }
+}
+.popper-my-course {
+    min-width: 380px;
+    padding-bottom: 12px;
+    background: #fff;
+    box-shadow: 0 -4px 32px #0003;
+    transition: all ease-in-out 0.3s;
+    // animation: fadeIn ease 0.3s;
+    border-radius: 10px;
+    padding-left: 0;
+    margin: 0;
+    overflow: hidden;
+    will-change: opacity, transform;
+    color: #1d2129;
+
+    & .header-tippy {
+        display: flex;
+        margin: 16px 16px 0;
+        & h6 {
+            font-size: 18px;
+        }
+        & .btn-expand-all {
+            font-size: 14px;
+        }
+    }
+    & .wrapper-item {
+        max-height: 440px;
+        overflow-y: auto;
+        &::-webkit-scrollbar-thumb {
+            background: #afacac;
+            border-radius: 4px;
+        }
+        &::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        &::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+    }
+    & .menu-item {
+        padding: 16px;
+    }
+    & .img-course {
+        width: 120px;
+        height: 68px;
+        object-fit: cover;
+        border-radius: 4px;
+        margin-right: 12px;
+        & img {
+            border-radius: 4px;
+        }
+    }
+    & .title-item h3 {
+        font-size: 14px;
+        color: #000;
+        margin-bottom: 0;
+    }
+    & .last-completed {
+        font-size: 12px;
+        color: #666;
+    }
+    & .btn-start-learning {
+        font-size: 14px;
+        font-weight: 600;
+    }
+    & .progress {
+        margin-top: 8px;
+        width: 200px;
+        height: 9px;
+    }
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 // Sidebar
@@ -138,8 +223,12 @@ body::-webkit-scrollbar-thumb:hover {
 
         & li {
             width: 40px;
-            height: 8px;
+            height: 16px;
             border-radius: 12px;
+            cursor: pointer;
+            & button {
+                height: 8px;
+            }
         }
         & li.active {
             width: 48px;
@@ -157,7 +246,7 @@ body::-webkit-scrollbar-thumb:hover {
     & .video-course {
         height: 200px;
         object-fit: cover;
-        border-radius: 24px;
+        border-radius: 24px 24px 0 0;
     }
 
     & .btn-preview {
@@ -225,30 +314,36 @@ body::-webkit-scrollbar-thumb:hover {
     height: 382px;
     background-color: #181821;
     color: #a9b3bb;
-}
-.contact {
-    color: #a9b3bb;
-}
-.title {
-    margin-bottom: 0;
-    font-size: 18px;
-    line-height: 1.6;
-    color: #fff;
-    text-transform: uppercase;
-    margin-top: 10px;
-}
-.list a,
-.list div {
-    position: relative;
-    font-size: 14px;
-    line-height: 22px;
-    margin-bottom: 4px;
-}
-.icon-socials {
-    & .icon-social {
-        width: 24px;
-        height: 24px;
-        margin-right: 8px;
+    & .contact {
+        color: #a9b3bb;
+    }
+    & .logo {
+        width: 40px;
+        height: 40px;
+        margin-right: 16px;
+        object-fit: cover;
+    }
+    & .title {
+        margin-bottom: 0;
+        font-size: 18px;
+        line-height: 1.6;
+        color: #fff;
+        text-transform: uppercase;
+        margin-top: 10px;
+    }
+    & .list a,
+    & .list div {
+        position: relative;
+        font-size: 14px;
+        line-height: 22px;
+        margin-bottom: 4px;
+    }
+    & .icon-socials {
+        & .icon-social {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+        }
     }
 }
 // Modal
@@ -314,8 +409,7 @@ body::-webkit-scrollbar-thumb:hover {
         scale: 1;
     }
 }
-.modal-verify-account {
-}
+
 .modal-1 {
     width: 800px;
     height: 520px;
@@ -332,64 +426,3 @@ body::-webkit-scrollbar-thumb:hover {
     border-radius: 16px;
     padding: 12px 28px 28px;
 }
-
-// // Custom bootstrap
-// .h-m-700 {
-//     min-height: 700px;
-// }
-// .h-m-300 {
-//     min-height: 300px;
-// }
-// .h-mx-300 {
-//     max-height: 300px;
-// }
-// .mt-6 {
-//     margin-top: 4rem;
-// }
-// .pt-6 {
-//     padding-top: 4rem;
-// }
-// .border-1 {
-//     border: 1 solid;
-// }
-// .border-radius-16 {
-//     border-radius: 16px;
-// }
-// .list-style-type-none {
-//     list-style-type: none;
-// }
-// .text-decor-underline {
-//     text-decoration: underline;
-// }
-// .text-decor-none {
-//     text-decoration: none;
-
-//     &:hover,
-//     &:focus,
-//     &:active,
-//     &:visited,
-//     &:link {
-//         text-decoration: none;
-//     }
-// }
-// .font-weight-400 {
-//     font-weight: 400;
-// }
-// .font-size-14 {
-//     font-size: 14px;
-// }
-// .color-main {
-//     color: $main-color;
-// }
-// .color-inherit {
-//     color: inherit;
-// }
-// .flex-flow-wrap {
-//     flex-flow: wrap;
-// }
-// .flex-basis-50 {
-//     flex-basis: 50%;
-// }
-// .flex-1 {
-//     flex: 1;
-// }

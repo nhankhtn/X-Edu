@@ -1,8 +1,5 @@
 const Course = require("../models/Course");
-const User = require("../models/User");
 const { mutipleMongooseToObject } = require("../../utils/mongoose");
-const { cloudinary } = require("../../configs/db")
-const { register, login } = require("../../utils/firebase");
 
 class AdminController {
   // [GET] /admin/stored/courses

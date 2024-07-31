@@ -15,6 +15,10 @@ document.addEventListener('DOMContentLoaded', function () {
             })());
         }
     });
+    // Icon up/down in sidebar 
+    $(".wrapper-lessons").on("click", function () {
+        $(this).find(".icon-expand").toggleClass("bi-chevron-down").toggleClass("bi-chevron-up")
+    })
     // Add query into url
     // const idLesson = lessons.find(lesson => lesson.lessonNumber === progress.lessonLatest)._id;
     let idLessonCurrent = progress.lessonLatest;
@@ -47,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 body: JSON.stringify({
                     idProgress: progress._id,
-                    progress: progress.progress,
+                    progress,
                 }),
             });
         } catch (err) {
@@ -90,11 +94,15 @@ document.addEventListener('DOMContentLoaded', function () {
     if (idLessonCurrent > 1) {
         $(".btn-prev").removeClass("disabled");
     }
-    $(".btn-next").on("click", function () {
+    $(".btn-next").on("click", async function () {
         if ($(this).hasClass("disabled")) return;
         const nextLesson = idLessonCurrent + 1;
         if (nextLesson > lessons.length) {
             handleCompleteCourse();
+            if (progress.lessonLatest <= lessons.length) {
+                progress.lessonLatest++;
+                await handleUpdateProgress();
+            }
             return;
         }
         window.location.href = `${window.location.href.split("?")[0]}?lesson=${nextLesson}`;
@@ -104,7 +112,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const prevLesson = idLessonCurrent - 1;
         window.location.href = `${window.location.href.split("?")[0]}?lesson=${prevLesson}`;
     })
-    const handleCompleteCourse = () => { console.log("Complete course") }
+    const handleCompleteCourse = () => {
+        console.log("Complete course")
+    }
     // Handle user click btn back
     $(".btn-back").on("click", function () {
         const propPaths = window.location.pathname.split("/");

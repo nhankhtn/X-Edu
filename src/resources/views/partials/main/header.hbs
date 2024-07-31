@@ -1,4 +1,4 @@
-<nav class='navbar navbar-expand-lg navbar-dark bg-light fixed-top'>
+<nav class='navbar navbar-expand-lg navbar-dark bg-light fixed-top header'>
     <header
         class='w-100 d-flex justify-content-space-between align-items-center pl-2 pr-2'
     >
@@ -23,14 +23,59 @@
                 </button>
             </div>
         </div>
-
+        <div class='popper-my-course d-none'>
+            <div class='header-tippy'>
+                <h6 class='flex-1'>Khoá học của tôi</h6>
+                <a href='/my-courses' class='btn-expand-all'>Xem tất cả</a>
+            </div>
+            <div class='wrapper-item'>
+                {{#each courses}}
+                    {{!-- {{#each (filterCourses courses 'Free')}} --}}
+                    <div
+                        data-name='{{this.slug}}'
+                        class='menu-item d-flex align-items-center'
+                    >
+                        <a class='img-course' href="/courses/{{this.slug}}">
+                            <img class='w-100 h-100' src='/img/min.jpg' alt=""/>
+                        </a>
+                        <div>
+                            <a class='title-item' href="/courses/{{this.slug}}">
+                                <h3>{{this.name}}</h3></a>
+                            <p class='mb-0 last-completed'>Bạn chưa học khoá này</p>
+                            <a
+                                title='start-learning'
+                                href="/courses/{{this.slug}}"
+                                class='bg-transparent btn-start-learning'
+                            >Bắt đầu học</a>
+                            <div class='d-none progress'>
+                                <div
+                                    class='progress-bar'
+                                    role='progressbar'
+                                    aria-valuemin='0'
+                                    aria-valuemax='100'
+                                ></div>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
         <div class='collapse navbar-collapse' id='navbarSupportedContent'>
-            <button class='notify-btn btn mr-2'>
-                <i class='bi bi-bell-fill'></i>
-            </button>
+            {{#if user}}
+                <button
+                    type='button'
+                    title='My course'
+                    class='btn bg-transparent btn-my-course'
+                >
+                    Khoá học của tôi
+                </button>
+                <button type='button' title='Notify' class='notify-btn btn mr-2'>
+                    <i class='bi bi-bell-fill'></i>
+                </button>
+            {{/if}}
             <ul class='navbar-nav ml-auto'>
 
-                {{#if (hasUser user)}}
+                {{#if user}}
                     <li class='nav-item dropdown'>
                         <a
                             class='nav-link dropdown-toggle text-dark'
@@ -99,6 +144,7 @@
                 {{else}}
                     <li class='nav-item'>
                         <button
+                            title="Register"
                             class='btn btn-outline-secondary btn-custom'
                             data-target='#modal-register'
                             data-toggle='modal'
@@ -106,6 +152,7 @@
                             Register
                         </button>
                         <button
+                            title="Login"
                             id='login-btn'
                             class='btn btn-warning btn-custom'
                             data-target='#modal-login'

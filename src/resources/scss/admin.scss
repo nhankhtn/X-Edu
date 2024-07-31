@@ -1,30 +1,3 @@
-// Route: auth/login
-// .container.has-login {
-//     height: 700px;
-// }
-// .form {
-//     width: 420px;
-//     margin-left: 412px;
-// }
-// .form-login {
-//     height: 340px;
-// }
-// .text-login {
-//     font-size: 16px !important;
-// }
-// .message-error {
-//     display: inline-block;
-// }
-// .btn-submit {
-//     width: 402px;
-//     box-sizing: border-box;
-//     margin-left: 8px;
-//     margin-right: 8px;
-// }
-// // Route: auth/register
-// .form-register {
-//     height: 480px;
-// }
 // admin/stored-courses
 #delete-course-modal,
 #edit-modal,
@@ -44,6 +17,10 @@
     &:hover {
         opacity: 0.8;
     }
+}
+.checkbox-select-all-options {
+    width: 112px;
+    margin: 0 16px;
 }
 // CSS tippy
 .popper {

@@ -5,12 +5,10 @@ const Schema = mongoose.Schema;
 
 const Section = new Schema(
   {
+    course: { type: String, unique: true }, // slug of Course
     title: { type: String, require: true },
-    userId: { type: String, ref: "User", required: true },
-    courseId: { type: Number, ref: "Course", required: true },
     sectionNumber: { type: Number },
-    options: { type: Object },
-    // primary key(userId, courseId, sectionNumber)
+    options: { type: Object }
   },
   {
     timestamps: true

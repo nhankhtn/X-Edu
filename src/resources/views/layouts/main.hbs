@@ -16,11 +16,12 @@
     <link rel="stylesheet" href="/css/app.css" />
     <link rel="stylesheet" href="/css/customBootstrap.css" />
     <link rel="stylesheet" href="/css/course.css" />
-    <link rel="stylesheet" href="/css/me.css" />
+    <link rel="stylesheet" href="/css/admin.css" />
+    <link rel="stylesheet" href="/css/my-courses.css">
   </head>
   <body>
     <div class="app">
-      {{>header user=user}}
+      {{>header}}
 
       <main class="container-fluid pt-5 mb-5 h-m-700"> 
         <div class="row h-100">
@@ -37,7 +38,7 @@
     </div>
     {{> ModalLogin}}
     {{> ModalRegister}}
-    {{> modals}}
+    {{> ModalVideoIntro}}
 
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

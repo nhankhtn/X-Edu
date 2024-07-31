@@ -1,10 +1,46 @@
 $height-header: 66px;
+
 .header-profile {
     & .btn-back {
         text-transform: uppercase;
         font-weight: 600;
         font-size: 12px;
         color: #808990;
+    }
+    & .logo {
+        width: 40px;
+        height: 40px;
+        margin-right: 16px;
+        object-fit: cover;
+    }
+    & .notify-btn {
+        font-size: 20px;
+        color: #707070;
+        background-color: transparent;
+    }
+    & .user-avatar {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        margin-right: 4px;
+    }
+    & .dropdown-menu {
+        min-width: 240px;
+        left: -180px;
+
+        & .user-avatar {
+            width: 40px;
+            height: 40px;
+        }
+        & .username {
+            font-size: 16px;
+            font-weight: 600;
+            color: #292929;
+        }
+        & .email {
+            font-size: 14px;
+            color: #757575;
+        }
     }
 }
 
